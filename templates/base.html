@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="nav-left">
+            <a href="/">TravelNow</a>
+        </div>
+
+        <div class="nav-right">
+            {% if user %}
+                <span class="nav-user">👤 {{ user.username }}</span>
+                {% if user.is_admin %}
+                    <a href="/admin">Адмін панель</a>
+                {% endif %}
+                    <a href="/logout">Вийти</a>
+            {% else %}
+                <a href="/login">Увійти</a>
+                <a href="/register">Реєстрація</a>
+            {% endif %}
+        </div>
+    </nav>
+
+</header>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

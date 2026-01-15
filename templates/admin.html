@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin-container">
+
+    <h1 class="admin-title">Адмін панель</h1>
+
+    <div class="admin-stats">
+        <div class="stat-card">
+            <h3>Користувачі</h3>
+            <p>{{ users|length }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Ролі</h3>
+            <p>Admin / User</p>
+        </div>
+    </div>
+
+    <div class="admin-table-wrapper">
+        <h2>Список користувачів</h2>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Логін</th>
+                    <th>Роль</th>
+                    <th>Статус</th>
+                    <th>Блокування</th>
+                    <th>Адмін права</th> <!-- Нова колонка -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr>
+                    <td>{{ u.id }}</td>
+                    <td>{{ u.username }}</td>
+                    <td>
+                        {% if u.is_admin %}
+                            <span class="badge admin">Admin</span>
+                        {% else %}
+                            <span class="badge user">User</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if u.is_blocked %}
+                            <span class="status blocked">Заблокований</span>
+                        {% else %}
+                            <span class="status active">Не заблокований</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not u.is_admin %}
+                        <form method="post" action="/admin/block/{{ u.id }}">
+                            <button type="submit" class="button small">
+                                {% if u.is_blocked %}Розблокувати{% else %}Блокувати{% endif %}
+                            </button>
+                        </form>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not u.is_admin %}
+                        <form method="post" action="/admin/make_admin/{{ u.id }}">
+                            <button type="submit" class="button small admin-toggle">
+                                Надати права
+                            </button>
+                        </form>
+                        {% else %}
+                        <form method="post" action="/admin/make_admin/{{ u.id }}">
+                            <button type="submit" class="button small admin-toggle">
+                                Забрати права
+                            </button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+{% endblock %}

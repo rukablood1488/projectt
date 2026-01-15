@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-container">
+    <h2>Вхід</h2>
+    <form method="post" action="/login">
+        <input type="text" name="username" placeholder="Логін" required>
+        <input type="password" name="password" placeholder="Пароль" required>
+        <button type="submit">Увійти</button>
+    </form>
+    <div class="form-footer">
+        Якщо немає акаунту — <a href="/register">зареєструйтесь</a>
+    </div>
+</div>
+{% endblock %}

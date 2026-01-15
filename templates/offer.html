@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="offer-card" style="max-width: 800px; margin: auto;">
+        <img src="/static/images/{{ offer.image }}" style="height: 350px;">
+
+        <div class="content">
+            <h1>{{ offer.title }}</h1>
+
+            <p style="margin-top: 15px; font-size: 16px; opacity: 0.9;">
+                {{ offer.description }}
+            </p>
+
+            <p style="margin-top: 20px; line-height: 1.6;">
+                Це унікальна туристична пропозиція, яка дозволить вам
+                повністю зануритися в атмосферу міста.  
+                Ви отримаєте незабутні враження, екскурсії, місцеву кухню
+                та найкращі локації для відпочинку.
+            </p>
+
+            <div style="margin-top: 30px;">
+                <a href="/" class="button">← Назад до пропозицій</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

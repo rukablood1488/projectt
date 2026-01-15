@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <h1 class="title">Популярні напрямки</h1>
+
+    <div class="offers-grid">
+        {% for offer in offers %}
+        <div class="offer-card">
+            <img src="/static/images/{{ offer.image }}" alt="{{ offer.title }}">
+
+            <div class="offer-body">
+                <h2>{{ offer.title }}</h2>
+                <p>{{ offer.description }}</p>
+
+                {% if user %}
+                    <a href="/offer/{{ offer.id }}" class="button">Переглянути</a>
+                {% else %}
+                    <a href="/login" class="button">Переглянути</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
